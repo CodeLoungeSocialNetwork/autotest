@@ -7,16 +7,17 @@ async function fillForm(email, password) {
 }
 
 describe(`Позитивные сценарии`, async function() {
-    
+    const url = `http://82.202.214.42/login`
+    const loginBtn = By.className(`btn--white`)
     it(`Авторизация с данными зарегистрированного пользователя`, async function() {
         //переменные
         const email = `test@skillbox.ru`
         const password = `Qwerty!@#321`
         //open page
-        await driver.get(`http://82.202.214.42/login`)
+        await driver.get(url)
         //actions
         await fillForm(email, password,)
-        await driver.findElement(By.css(`.btn--white`)).click();
+        await driver.findElement(loginBtn).click();
         // asserts
         try {
             await driver.wait(until.elementLocated(By.css(".main-layout__header")), 2000) // проверка на наличие хеддера
@@ -28,16 +29,16 @@ describe(`Позитивные сценарии`, async function() {
 })
 
 describe(`Негативные сценарии`, async function() {
-    
+    const url = `http://82.202.214.42/login`
     it(`Авторизация с данными не существующего пользователя`, async function() {
         //переменные
         const email = `test@skill123box.ru`
         const password = `Qwerty#321`
         //open page
-        await driver.get(`http://82.202.214.42/login`);
+        await driver.get(url);
         //actions
         fillForm(email, password,)
-        await driver.findElement(By.css(`.btn--white`)).click();
+        await driver.findElement(loginBtn).click();
         // asserts
 
         try { // проверка на наличие хеддера
@@ -51,10 +52,10 @@ describe(`Негативные сценарии`, async function() {
         const email = `test@skillbox.ru`
         const password = ``
         //open page
-        await driver.get(`http://82.202.214.42/login`);
+        await driver.get(url);
         //actions
         fillForm(email, password,)
-        await driver.findElement(By.css(`.btn--white`)).click();
+        await driver.findElement(loginBtn).click();
         // asserts
         const errorText = await driver.findElement(By.className(`form__error`)).getText()
         expect(errorText).to.be.equal(`Введите пароль`, `отсутствует сообщение о пустом поле пароль`) // проверка текста ошибки
@@ -66,10 +67,10 @@ describe(`Негативные сценарии`, async function() {
         const email = ``
         const password = `Qwerty!@#321`
         //open page
-        await driver.get(`http://82.202.214.42/login`);
+        await driver.get(url);
         //actions
         fillForm(email, password,)
-        await driver.findElement(By.css(`.btn--white`)).click();
+        await driver.findElement(loginBtn).click();
         // asserts
         const errorText = await driver.findElement(By.className(`form__error`)).getText()
         expect(errorText).to.be.equal(`Введите Email`, `отсутствует сообщение о пустом поле email`) // проверка текста ошибки
@@ -81,10 +82,10 @@ describe(`Негативные сценарии`, async function() {
         const email = `teпочта@skillbox.ru`
         const password = `Qwerty!@#321`
         //open page
-        await driver.get(`http://82.202.214.42/login`);
+        await driver.get(url);
         //actions
         fillForm(email, password,)
-        await driver.findElement(By.css(`.btn--white`)).click();
+        await driver.findElement(loginBtn).click();
         // asserts
         const errorText = await driver.findElement(By.className(`form__error`)).getText()
         expect(errorText).to.be.equal(`Введите корректный Email`, `отсутствует сообщение о вводе невалидного значения email`) // проверка текста ошибки
@@ -96,11 +97,11 @@ describe(`Негативные сценарии`, async function() {
         const email = `test@skillbox.ru`
         const password = `Qwerty!@#321`
         //open page
-        await driver.get(`http://82.202.214.42/login`);
+        await driver.get(url);
         //actions
         fillForm(email, password,)
-        await driver.findElement(By.className(`btn--white`)).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(loginBtn).click()
+        await driver.findElement(loginBtn).click()
         // asserts
         try {
             await driver.wait(until.elementLocated(By.css(".main-layout__header")), 2000)    
@@ -115,10 +116,10 @@ describe(`Негативные сценарии`, async function() {
         const email = `   test@skillbox.ru   `
         const password = `Qwerty!@#321`
         //open page
-        await driver.get(`http://82.202.214.42/login`);
+        await driver.get(url);
         //actions
         fillForm(email, password,)
-        await driver.findElement(By.css(`.btn--white`)).click();
+        await driver.findElement(loginBtn).click();
         // asserts
         try {
             await driver.wait(until.elementLocated(By.css(".main-layout__header")), 2000)

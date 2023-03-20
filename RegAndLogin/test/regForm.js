@@ -10,6 +10,9 @@ async function fillTheForm(email, password, repeatPassword, name, surname) {
 }
 
 describe(`Позитивные проверки формы регистрации`, async function() {
+    const URL = `http://82.202.214.42/registration`
+    const agreeCheck = By.css(".form__checkbox-label")
+    const registerBtn = By.className(`btn--white`)
     it(`Регистрация в валидными данными`, async function() {
         //variables
         const email = `test@mail.com`
@@ -19,12 +22,12 @@ describe(`Позитивные проверки формы регистраци�
         const surname = `Test`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -40,7 +43,7 @@ describe(`Позитивные проверки формы регистраци�
         const surname = `Test`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
@@ -54,7 +57,9 @@ describe(`Позитивные проверки формы регистраци�
 })
 
 describe("Негативные сценарии проверки формы регистрации", async function() {
-    
+    const URL = `http://82.202.214.42/registration`
+    const agreeCheck = By.css(".form__checkbox-label")
+    const registerBtn = By.className(`btn--white`)
     it(`Регистрация c уже использованным email`, async function() {
         //variables
         const email = `test@mail.com`
@@ -64,12 +69,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = `Test`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -85,12 +90,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = ``
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -119,12 +124,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = `Профиль`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -144,12 +149,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = `Профиль`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -165,12 +170,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = `Профиль`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -191,12 +196,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = `Профиль`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -214,12 +219,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = `Проф123$#@!иль`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -239,12 +244,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = ``
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.css(".form__checkbox-label")).click()
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(agreeCheck).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
             const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -260,11 +265,11 @@ describe("Негативные сценарии проверки формы ре
         const surname = `Test`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.className(`btn--white`)).click()
+        await driver.findElement(registerBtn).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
@@ -280,12 +285,12 @@ describe("Негативные сценарии проверки формы ре
         const surname = `   Test`
 
         //open page
-        await driver.get(`http://82.202.214.42/registration`);
+        await driver.get(URL);
 
         // actions
         fillTheForm(email, password, repeatPassword, name, surname)
-        await driver.findElement(By.className(`btn--white`)).click()
-        await driver.findElement(By.css(".form__checkbox-label")).click()
+        await driver.findElement(registerBtn).click()
+        await driver.findElement(agreeCheck).click()
 
         //asserts
         const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
