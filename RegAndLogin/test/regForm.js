@@ -1,6 +1,8 @@
 const { expect } = require(`chai`);
 const { Builder, By, until } = require(`selenium-webdriver`);
 
+const URL = `http://82.202.214.42:8899/registration`
+
 async function fillTheForm(email, password, repeatPassword, name, surname) {
     await driver.findElement(By.id(`register-email`)).sendKeys(email)
     await driver.findElement(By.id(`register-password`)).sendKeys(password)
@@ -10,7 +12,7 @@ async function fillTheForm(email, password, repeatPassword, name, surname) {
 }
 
 describe(`Позитивные проверки формы регистрации`, async function() {
-    const URL = `http://82.202.214.42/registration`
+    
     const agreeCheck = By.css(".form__checkbox-label")
     const registerBtn = By.className(`btn--white`)
     it(`Регистрация в валидными данными`, async function() {
@@ -57,7 +59,6 @@ describe(`Позитивные проверки формы регистраци�
 })
 
 describe("Негативные сценарии проверки формы регистрации", async function() {
-    const URL = `http://82.202.214.42/registration`
     const agreeCheck = By.css(".form__checkbox-label")
     const registerBtn = By.className(`btn--white`)
     it(`Регистрация c уже использованным email`, async function() {
@@ -234,6 +235,26 @@ describe("Негативные сценарии проверки формы ре
         expect(errorMessege).to.be.equal(`Введите корректную фамилию`, `текст ошибки заполнения поля фамилия`)
         
     })
+
+    it.only("Регистрация пользователя без ввода captcha", async function() {
+        //variables
+        const email = `test@mail.ru`
+        const password = `Qwerty!@#321`
+        const repeatPassword = `Qwerty!@#321`
+        const name = `Тестовый`
+        const surname = `Проф123$#@!иль`
+
+        //open page
+        await driver.get(URL);
+
+        // actions
+        fillTheForm(email, password, repeatPassword, name, surname)
+        await driver.findElement(registerBtn).click()
+        const error = await driver.findElement(By.css(`div.form__block:nth-child(3) > div.form__group > span`))
+        //asserts
+        expect(await error.getText()).to.be.equal(`Обязательное поле`, `Неверно указан текст об ошибке`)
+        
+    })
     
     it("Регистрация без ввода данных", async function() {
         //variables
@@ -283,6 +304,27 @@ describe("Негативные сценарии проверки формы ре
         const repeatPassword = `   Rthsdfj#@!1`
         const name = `   Auto`
         const surname = `   Test`
+
+        //open page
+        await driver.get(URL);
+
+        // actions
+        fillTheForm(email, password, repeatPassword, name, surname)
+        await driver.findElement(registerBtn).click()
+        await driver.findElement(agreeCheck).click()
+
+        //asserts
+        const successfulRegistrationTitle = await driver.findElement(By.className(`form-layout__title`)).getText()
+        expect(await successfulRegistrationTitle).not.to.be.equal(`Вы зарегистрированы!`, `Пользователь не зарегистрирован`)
+    })
+
+    it.only(`Регистрация с вводом больших данных в поля формы`, async function() {
+        //variables
+        const email = `itsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeText@mail.com`
+        const password = `itsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeText#@!1`
+        const repeatPassword = `itsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeText#@!1`
+        const name = `itsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeText`
+        const surname = `itsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeTextsomeText`
 
         //open page
         await driver.get(URL);

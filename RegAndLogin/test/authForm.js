@@ -6,9 +6,10 @@ async function fillForm(email, password) {
     await driver.findElement(By.id(`login-password`)).sendKeys(password);
 }
 
+const url = `http://82.202.214.42:8899/login`
+const loginBtn = By.className(`btn--white`)
+
 describe(`Позитивные сценарии`, async function() {
-    const url = `http://82.202.214.42/login`
-    const loginBtn = By.className(`btn--white`)
     it(`Авторизация с данными зарегистрированного пользователя`, async function() {
         //переменные
         const email = `test@skillbox.ru`
@@ -18,9 +19,9 @@ describe(`Позитивные сценарии`, async function() {
         //actions
         await fillForm(email, password,)
         await driver.findElement(loginBtn).click();
-        // asserts
+        // asserts        
         try {
-            await driver.wait(until.elementLocated(By.css(".main-layout__header")), 2000) // проверка на наличие хеддера
+            await driver.wait(until.elementLocated(By.css(`header.main-layout__header`)), 1000) // проверка на наличие хеддера
         } catch {
             throw Error(`Авторизация с валидными данными`)
         }
@@ -29,7 +30,7 @@ describe(`Позитивные сценарии`, async function() {
 })
 
 describe(`Негативные сценарии`, async function() {
-    const url = `http://82.202.214.42/login`
+
     it(`Авторизация с данными не существующего пользователя`, async function() {
         //переменные
         const email = `test@skill123box.ru`
@@ -95,7 +96,7 @@ describe(`Негативные сценарии`, async function() {
     it(`Авторизация с пробелами в поле пароль`, async function() {
         //переменные
         const email = `test@skillbox.ru`
-        const password = `Qwerty!@#321`
+        const password = `     Qwerty!@#321    `
         //open page
         await driver.get(url);
         //actions
